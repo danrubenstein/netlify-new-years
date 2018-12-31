@@ -2,12 +2,63 @@
 <html>
 <head>
 	<title>Is it New Years yet?</title>
+	<style type="text/css">
+		.footer {
+		   position:absolute;
+		   bottom:0;
+		   width:100%;
+		   height:40px;   /* Height of the footer */
+		   vertical-align: bottom;
+
+		}
+	</style>
 </head>
 <body>
 	<h1>Is it New Years yet?</h1>
 	<p>Maybe, depending on where you live.</p>
-	<footer>
+	<div>
+		<h4 align="center" id="random-city-header">
+		</h4>
+		<p id="gmt-paragraph">
+		</p>
+		Here, it's currently:
+		<div align="center" id="random-city-cur-time">
+		</div>
+	</div>
+	<footer class="footer">
 		This is a project to teach <a href=https://twitter.com/danrubenstein>@dnrubenstein</a> how Netlify works. You can find the source code <a href=https://github.com/danrubenstein/netlify-new-years>here.</a>
 	</footer>
+	<script>
+		cities = [
+			["New York", "United States", -5],
+			["Guangzhou", "China", 8],
+			["Tokyo", "Japan", 9],
+			["Tripoli",	"Libya", 2],
+			["Monterrey", "Mexico", -6],
+		]
+
+		// pick a city 
+		var city = cities[Math.floor(Math.random()*cities.length)];
+
+		document.getElementById("random-city-header").innerHTML = city[0] + ", " + city[1]
+		document.getElementById("gmt-paragraph").innerHTML = (
+			"This city is " 
+			+ Math.abs(city[2])
+			+ " hours "
+			+ (city[2] > 0 ? "ahead of" : "behind")
+			+ " Greenwhich Mean Time."
+		)
+		// find the current GMT time 
+		var currentGMTTime = new Date().getTime()
+
+		var localTime = new Date(currentGMTTime + city[2] * 1000 * 3600)
+
+		document.getElementById("random-city-cur-time").innerHTML = (
+				localTime.getUTCHours() + 
+				":" + localTime.getUTCMinutes())
+
+
+
+	</script>
 </body>
 </html>
