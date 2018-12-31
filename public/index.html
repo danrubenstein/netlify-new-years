@@ -24,6 +24,9 @@
 		Here, it's currently:
 		<div align="center" id="random-city-cur-time">
 		</div>
+		Which means...
+		<div align="center" id="random-city-status">
+		</div>
 	</div>
 	<footer class="footer">
 		This is a project to teach <a href=https://twitter.com/danrubenstein>@dnrubenstein</a> how Netlify works. You can find the source code <a href=https://github.com/danrubenstein/netlify-new-years>here.</a>
@@ -57,7 +60,14 @@
 				localTime.getUTCHours() + 
 				":" + localTime.getUTCMinutes())
 
+		// New Years 2019:
+		const nye = 1546318800
 
+		document.getElementById("random-city-status").innerHTML = (
+			(localTime.getTime() / 1000) > nye
+			? "It's 2019 HOLD ONTO YOUR HATS"
+			: "Soon the nightmare of 2018 will be over"
+		)
 
 	</script>
 </body>
