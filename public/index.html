@@ -53,6 +53,12 @@
 	<script>
 		cities = [
 			["New York", "United States", -5],
+			["Quebec", "Canada", -4],
+			["Rio De Janeiro", "Brazil", -3],
+			["King Edward Point", "Britain", -2],
+			["Praia", "Cape Verde", -1],
+			["London", "Britain", 0],
+			["Ghent", "Belgium", 1],
 			["Guangzhou", "China", 8],
 			["Tokyo", "Japan", 9],
 			["Tripoli",	"Libya", 2],
@@ -70,21 +76,23 @@
 			+ (city[2] > 0 ? "ahead of" : "behind")
 			+ " Greenwhich Mean Time."
 		)
-		// find the current GMT time 
-		var currentGMTTime = new Date().getTime()
 
-		var localTime = new Date(currentGMTTime + city[2] * 1000 * 3600)
+		const localTime = (
+			Date.now()
+			+ (city[2] * 1000 * 3600)
+		)
 
 		document.getElementById("random-city-cur-time").innerHTML = (
-				localTime.getUTCHours() + 
-				":" + ("0" + localTime.getUTCMinutes()).slice(-2)
+			("0" + (new Date(localTime)).getUTCHours()).slice(-2)
+			+ ":"
+			+ ("0" + (new Date(localTime)).getUTCMinutes()).slice(-2)
 		)
 
 		// New Years 2019:
 		const nye = 1546318800
 
 		document.getElementById("random-city-status").innerHTML = (
-			(localTime.getTime() / 1000) > nye
+			(localTime / 1000 + (new Date()).getTimezoneOffset() * 60) > nye
 			? "It's 2019 HOLD ONTO YOUR HATS"
 			: "Soon the nightmare of 2018 will be over"
 		)
