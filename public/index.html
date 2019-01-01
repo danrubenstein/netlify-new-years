@@ -2,31 +2,50 @@
 <html>
 <head>
 	<title>Is it New Years yet?</title>
+	<link href="https://fonts.googleapis.com/css?family=Archivo" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
 	<style type="text/css">
+		body {
+		  background-color: lightblue;
+		  font-family: 'Roboto', serif;
+		}
+
+		h1 {
+		  font-family: 'Archivo', serif;
+		}
+
+		.announce {
+		  font-family: 'Archivo', serif;
+		  font-size: 24px;
+		}
+
 		.footer {
 		   position:absolute;
 		   bottom:0;
 		   width:100%;
 		   height:40px;   /* Height of the footer */
 		   vertical-align: bottom;
-
 		}
 	</style>
 </head>
 <body>
-	<h1>Is it New Years yet?</h1>
+	<h1 align="center">Is it New Years yet?</h1>
 	<p>Maybe, depending on where you live.</p>
 	<div>
 		<h4 align="center" id="random-city-header">
 		</h4>
 		<p id="gmt-paragraph">
 		</p>
+		<p>
 		Here, it's currently:
-		<div align="center" id="random-city-cur-time">
+		<div class="announce" align="center" id="random-city-cur-time">
 		</div>
+		</p>
+		<p>
 		Which means...
-		<div align="center" id="random-city-status">
+		<div class="announce" align="center" id="random-city-status">
 		</div>
+		</p>
 	</div>
 	<footer class="footer">
 		This is a project to teach <a href=https://twitter.com/danrubenstein>@dnrubenstein</a> how Netlify works. You can find the source code <a href=https://github.com/danrubenstein/netlify-new-years>here.</a>
@@ -58,7 +77,8 @@
 
 		document.getElementById("random-city-cur-time").innerHTML = (
 				localTime.getUTCHours() + 
-				":" + localTime.getUTCMinutes())
+				":" + ("0" + localTime.getUTCMinutes()).slice(-2)
+		)
 
 		// New Years 2019:
 		const nye = 1546318800
